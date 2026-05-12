@@ -2,8 +2,8 @@ import React from 'react';
 
 const Cart = ({ cartItems }) => {
   return (
-    <div className="cart" style={{ marginTop: '30px', padding: '20px', borderTop: '2px solid #333' }}>
-      <h2>Your Cart</h2>
+    <div className="cart">
+      <h2>Shopping Cart</h2>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
