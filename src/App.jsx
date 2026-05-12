@@ -3,8 +3,7 @@ import ProductList from './components/ProductList'
 import DarkModeToggle from './components/DarkModeToggle'
 import Cart from './components/Cart'
 
-// The test expects these exact names and IDs to perform its "find" operation
-const initialProducts = [
+export const initialProducts = [
   { id: 1, name: 'Apple', category: 'Fruits', price: 1.00, inStock: true },
   { id: 2, name: 'Milk', category: 'Dairy', price: 2.50, inStock: false },
 ];
