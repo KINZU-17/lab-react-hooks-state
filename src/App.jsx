@@ -3,6 +3,7 @@ import ProductList from './components/ProductList'
 import DarkModeToggle from './components/DarkModeToggle'
 import Cart from './components/Cart'
 
+// The test expects these exact names and IDs to perform its "find" operation
 const initialProducts = [
   { id: 1, name: 'Apple', category: 'Fruits', price: 1.00, inStock: true },
   { id: 2, name: 'Milk', category: 'Dairy', price: 2.50, inStock: false },
@@ -26,7 +27,6 @@ const App = () => {
       <h1>🛒 Shopping App</h1>
       <p>Welcome! Your task is to implement filtering, cart management, and dark mode.</p>
 
-      {/* Must contain the word "Toggle" */}
       <DarkModeToggle isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
 
       <div style={{ margin: '20px 0' }}>
