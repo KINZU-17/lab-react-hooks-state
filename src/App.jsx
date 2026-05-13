@@ -1,49 +1,55 @@
-import React, { useState } from 'react'
+import React, {useState, useMemo } from 'react'
 import ProductList from './components/ProductList'
+import CssBaseline from '@mui/material/CssBaseline'
 import DarkModeToggle from './components/DarkModeToggle'
 import Cart from './components/Cart'
-
-export const initialProducts = [
-  { id: 1, name: 'Apple', category: 'Fruits', price: 1.00, inStock: true },
-  { id: 2, name: 'Milk', category: 'Dairy', price: 2.50, inStock: false },
-];
-
+import { createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [cart, setCart] = useState([]);
-  const [category, setCategory] = useState('all');
-
-  const addToCart = (itemName) => {
-    setCart((prevCart) => [...prevCart, itemName]);
+  //this is for Dark Mode state
+  const [mode, setMode] = useState("light");
+  const theme = useMemo (() => 
+    createTheme({
+      palette:{mode}
+    }), [mode]);
+ const toggleMode = () => {setMode((prev) => (prev === "light" ? "dark" : "light" ));
   };
+   
+const[cartItems, setCartItems] = useState([]);
+const addToCart = (product) => {
+  setCartItems((prevItems)=> [...prevItems, product]);
+};
+const[category, setCategory] = useState("all");
 
-  const filteredProducts = category === 'all'
-    ? initialProducts
-    : initialProducts.filter((p) => p.category === category);
+
+
+  // TODO: Implement state for dark mode toggl
+
+  // TODO: Implement state for cart management
+
+  // TODO: Implement state for category filtering
 
   return (
-    <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
+    <div>
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <DarkModeToggle mode={mode} toggleMode={toggleMode} />
+      
       <h1>🛒 Shopping App</h1>
-      <p>Welcome! Your task is to implement filtering, cart management, and dark mode.</p>
-
-      <DarkModeToggle isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-
-      <div style={{ margin: '20px 0' }}>
-        <label htmlFor="category-filter">Filter by Category: </label>
-        <select 
-          id="category-filter" 
-          value={category} 
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="all">All</option>
-          <option value="Fruits">Fruits</option>
-          <option value="Dairy">Dairy</option>
-        </select>
-      </div>
-
-      <ProductList products={filteredProducts} onAddToCart={addToCart} />
-
-      <Cart cartItems={cart} />
+      <p>
+        Welcome! to our grocery.
+      </p>
+      {/* TODO: Implement category filter dropdown */}
+      <label>Filter by Category: </label>
+      <select value={category} onChange ={(e) => setCategory(e.target.value)}>
+        <option value="all">All</option>
+        <option value="Fruits">Fruits</option>
+        <option value="Dairy">Dairy</option>
+      </select>
+      <ProductList selectedCategory={category} addToCart={addToCart}/>
+      <Cart cartItems={cartItems}/>
+      </ThemeProvider>
+      {/* TODO: Implement and render Cart component */}
     </div>
   )
 }
